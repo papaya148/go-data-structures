@@ -3,23 +3,13 @@ package list
 import (
 	"fmt"
 	"strings"
+
+	"github.com/papaya147/go-data-structures/node"
 )
 
-type Node[T any] struct {
-	Value T
-	Next  *Node[T]
-}
-
-func NewNode[T any](value T) *Node[T] {
-	return &Node[T]{
-		Value: value,
-		Next:  nil,
-	}
-}
-
 type LinkedList[T any] struct {
-	Head *Node[T]
-	Tail *Node[T]
+	Head *node.Node[T]
+	Tail *node.Node[T]
 	Size uint
 }
 
@@ -45,10 +35,10 @@ func (l *LinkedList[T]) TailValue() T {
 
 func (l *LinkedList[T]) Append(value T) {
 	if l.Head == nil {
-		l.Head = NewNode(value)
+		l.Head = node.NewNode(value)
 		l.Tail = l.Head
 	} else {
-		l.Tail.Next = NewNode(value)
+		l.Tail.Next = node.NewNode(value)
 		l.Tail = l.Tail.Next
 	}
 	l.Size++
@@ -59,13 +49,13 @@ func (l *LinkedList[T]) Insert(value T, position uint) {
 		l.Append(value)
 		return
 	}
-	var prev *Node[T]
+	var prev *node.Node[T]
 	curr := l.Head
 	for i := 0; i < int(position); i++ {
 		prev = curr
 		curr = curr.Next
 	}
-	newNode := NewNode(value)
+	newNode := node.NewNode(value)
 	newNode.Next = curr
 	if prev == nil {
 		l.Head = newNode
@@ -79,7 +69,7 @@ func (l *LinkedList[T]) Delete(position uint) T {
 	if position >= l.Size {
 		position = l.Size - 1
 	}
-	var prev *Node[T]
+	var prev *node.Node[T]
 	curr := l.Head
 	for i := 0; i < int(position); i++ {
 		prev = curr
