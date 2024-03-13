@@ -6,8 +6,8 @@ type Stack[T any] struct {
 	list list.List[T]
 }
 
-func NewStack[T any]() Stack[T] {
-	return Stack[T]{
+func NewStack[T any]() *Stack[T] {
+	return &Stack[T]{
 		list: list.NewLinkedList[T](),
 	}
 }

@@ -11,6 +11,7 @@ func TestStack(t *testing.T) {
 	st.Pop()
 	st.Push(4)
 	st.Push(6)
+	log.Println(st.Peek())
 	st.Pop()
 	log.Println(st.ToString())
 }
